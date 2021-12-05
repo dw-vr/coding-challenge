@@ -16,7 +16,7 @@ class Product extends Model
     protected $primaryKey= 'sku';
 
     //fillable fields are those that can be asigned
-    protected $fillable= array('name','category','sku','price','quantity');
+    protected $fillable= array('name','category_id','sku','price','quantity');
 
     //hidden fields are not returned in a query
     protected $hidden = ['created_at','modified_at'];

@@ -14,7 +14,7 @@ class Category extends Model
     //if no primary key is specified, then a default one named id is created.
 
     //fillable fields are those that can be asigned
-    protected $fillable= array('name');
+    protected $fillable= array('id','name');
 
     //hidden fields are not returned in a query
     protected $hidden = ['created_at','modified_at'];
