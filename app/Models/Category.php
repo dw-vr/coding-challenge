@@ -17,7 +17,7 @@ class Category extends Model
     protected $fillable= array('name');
 
     //hidden fields are not returned in a query
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at','modified_at'];
 
     //Each category have many products
     public function products(){

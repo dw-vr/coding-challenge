@@ -19,7 +19,7 @@ class Product extends Model
     protected $fillable= array('name','category','sku','price','quantity');
 
     //hidden fields are not returned in a query
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at','modified_at'];
 
     //Each product has 1:N relationship with a category
     public function category(){
