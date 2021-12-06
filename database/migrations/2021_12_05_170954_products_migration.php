@@ -14,7 +14,7 @@ class ProductsMigration extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id('sku');
+            $table->string('sku')->primary();
             $table->string('name');
             $table->float('price');
             $table->integer('quantity');
