@@ -12,14 +12,17 @@ class Product extends Model
     //Table name in DDBB
     protected $table='products';
 
+    //because our primary key is alphanumeric, se incrementing to false
+    public $incrementing = false;
     //if no primary key is specified, then a default one named id is created.
+    
     protected $primaryKey= 'sku';
 
     //fillable fields are those that can be asigned
     protected $fillable= array('name','category_id','sku','price','quantity');
 
     //hidden fields are not returned in a query
-    protected $hidden = ['created_at','modified_at'];
+    protected $hidden = ['created_at','updated_at'];
 
     //Each product has 1:N relationship with a category
     public function category(){
