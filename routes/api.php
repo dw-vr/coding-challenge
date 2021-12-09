@@ -28,5 +28,5 @@ Route::prefix('/v1')->group(function(){
     //['only'=>['edit','create'] ]
     //for security reasons, we use only
     Route::resource('categories',CategoryController::class,['only'=>['index','show'] ]);
-    Route::resource('products',ProductController::class,['only'=>['index','show','create','update','destroy'] ]);
+    Route::resource('products',ProductController::class,['only'=>['index','show','store','update','destroy'] ]);
 });

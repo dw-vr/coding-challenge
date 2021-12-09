@@ -12,7 +12,8 @@ class Product extends Model
     //Table name in DDBB
     protected $table='products';
 
-    //because our primary key is alphanumeric, se incrementing to false
+    //because our primary key is alphanumeric, set incrementing to false,
+    //if not, it will return always 0
     public $incrementing = false;
     //if no primary key is specified, then a default one named id is created.
     
