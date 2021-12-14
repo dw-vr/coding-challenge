@@ -25,10 +25,7 @@ class CategoriasSeeder extends Seeder
         foreach ($products['products'] as $key => $value ){
             //check if category already exists
             $category = Category::where('name', '=', $value['category'])->first();
-            if($category ===null){
-                //Doesn't exist
-                //$this->command->line($value['category']);
-                //$this->command->line('Inserting category because not exists');
+            if(isnull($category)){
                 Category::create([
                     "name"=>$value['category']]);
             }

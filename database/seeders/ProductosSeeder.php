@@ -27,8 +27,7 @@ class ProductosSeeder extends Seeder
             foreach ($products['products'] as $key => $value ){
                 //obtain the category ID
                 $category = Category::where('name', '=', $value['category'])->first();
-                if(!($category ===null)){
-                    $this->command->line($category);
+                if(!(isnull($category))){
                     Product::create([
                         "name"=>$value['name'],
                         "category_id"=>$category['id'],

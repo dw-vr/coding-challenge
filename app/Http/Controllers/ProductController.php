@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(Product::all(), 200);
+        return response()->json(Product::all(), Request::HTTP_OK);
     }
 
     /**
@@ -26,25 +26,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $httpResultCode=201;
         try{
             $product = Product::create($request->all());
-            return response()->json($product, $httpResultCode);
+            return response()->json($product, Request::HTTP_CREATED);
         }
         catch (QueryException $e){
-            $httpResultCode=400;
-            $error_code = $e->errorInfo[1];
-            if($error_code == 1062){
-                return response()->json("Duplicate entry", $httpResultCode);
-            }
-            elseif($error_code == 1364){
-                //some required data missing
-                return response()->json($e->errorInfo[2], $httpResultCode);
-            }
-            else{
-                //A lot of things can go bad. This probably needs to be logged for further analysis
-                return response()->json('Unknow error', $httpResultCode);
-            }
+            return response()->json($e->errorInfo[2], Request::HTTP_BAD_REQUEST);
         }
         
     }
@@ -59,11 +46,11 @@ class ProductController extends Controller
     {
         //
         $product = Product::where('sku', '=', $sku)->first();
-        if($product===null){
-            return response()->json('Product not found', 404);
+        if(isnull($product)){
+            return response()->json('Product not found', Request::HTTP_NOT_FOUND);
         }
         else{
-            return response()->json($product, 200);
+            return response()->json($product, Request::HTTP_OK);
         }
 
     }
@@ -77,7 +64,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        return response()->json('Edit Not implemented', 501);
+        return response()->json('Not implemented', Request::HTTP_NOT_IMPLEMENTED);
     }
 
     /**
@@ -91,8 +78,8 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        if($product===null){
-            return response()->json('Product not found '. $id, 404);
+        if(isnull($product)){
+            return response()->json('Product not found '. $id, Request::HTTP_NOT_FOUND);
         }
         else{
             $product->name = $request['name'];
@@ -100,7 +87,7 @@ class ProductController extends Controller
             $product->quantity = $request['quantity'];
             $product->category_id = $request['category_id'];
             $product->save();
-            return response()->json($product, 200);
+            return response()->json($product, Request::HTTP_OK);
         }
             
         
@@ -116,6 +103,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return response()->json('', 204);
+        return response()->json('', Request::HTTP_NO_CONTENT);
     }
 }
